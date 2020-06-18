@@ -12,7 +12,7 @@ build:
   number: 0
   noarch: python
   script:
-    - {{ PYTHON }} -m flit install
+    - FLIT_ROOT_INSTALL=1 {{ PYTHON }} -m flit install
 
 requirements:
   host:
