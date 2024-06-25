@@ -11,8 +11,7 @@ source:
 build:
   skip: True  # [py<38]
   number: 0
-  script:
-    - FLIT_ROOT_INSTALL=1 {{ PYTHON }} -m flit install
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   host:
