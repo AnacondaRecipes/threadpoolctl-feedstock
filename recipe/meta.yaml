@@ -23,12 +23,16 @@ requirements:
     - python
 
 test:
+  source_files:
+    tests
   requires:
     - numpy
+    - pytest
   imports:
     - threadpoolctl
   commands:
     - python -m threadpoolctl -i numpy
+    - pytest -v tests
 
 about:
   home: https://github.com/joblib/threadpoolctl
