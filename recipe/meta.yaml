@@ -20,19 +20,8 @@ requirements:
     - flit-core >2,<4
   run:
     - python
-
-{% set skip_tests = "" %}
-{% set skip_tests = skip_tests + "test_controller_info_actualized or " %}
-{% set skip_tests = skip_tests + "test_threadpool_limits_by_prefix or " %}
-{% set skip_tests = skip_tests + "test_threadpool_limits_by_prefix or " %}
-{% set skip_tests = skip_tests + "test_set_threadpool_limits_by_api or " %}
-{% set skip_tests = skip_tests + "test_threadpool_limits_function_with_side_effect or " %}
-{% set skip_tests = skip_tests + "test_threadpool_limits_manual_restore or " %}
-{% set skip_tests = skip_tests + "test_threadpool_controller_limit or " %}
-{% set skip_tests = skip_tests + "test_get_params_for_sequential_blas_under_openmp or " %}
-{% set skip_tests = skip_tests + "test_nested_limits or " %}
-{% set skip_tests = skip_tests + "test_threadpool_controller_as_decorator or " %}
-{% set skip_tests = skip_tests + "check_blas_num_threads" %}
+  run_constrained:
+    - blas=*=openblas  # [osx and x86_64]
 
 test:
   source_files:
@@ -47,12 +36,10 @@ test:
     - pip check
     - python -m threadpoolctl -i numpy
 
-    - pytest -v tests                              # [not (aarch64 or s390x or (osx and x86_64))]
+    - pytest -v tests                              # [not (aarch64 or s390x)]
     # linux-aarch64 (neoversen1) and s390x (z14) are unrecognized
     # architectures on Prefect.  linux-aarch64 (m1) is perfectly OK.
     - pytest -v tests -k 'not test_architecture'   # [aarch64 or s390x]
-    # osx-64 gets a dozen FAILURES
-    - pytest -v tests -k "not ({{ skip_tests }})"  # [osx and x86_64]
 
 about:
   home: https://github.com/joblib/threadpoolctl
