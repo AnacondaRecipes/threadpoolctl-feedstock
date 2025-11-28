@@ -34,10 +34,10 @@ test:
   commands:
     - pip check
     - python -m threadpoolctl -i numpy
-    - pytest -v tests  # [not aarch64]
+    - pytest -v tests  # [not ((linux and aarch64) or (osx and arm64))]
     # linux-aarch64 and osx-arm64 (neoversen1) are unrecognized
     # architectures on Prefect.  linux-aarch64 (m1) is perfectly OK.
-    - pytest -v tests -k 'not (test_architecture or test_architecture)'  # [aarch64 or osx]
+    - pytest -v tests -k 'not (test_architecture)'  # [(linux and aarch64) or (osx and arm64)]
 
 about:
   home: https://github.com/joblib/threadpoolctl
