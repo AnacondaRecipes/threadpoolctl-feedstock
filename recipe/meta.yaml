@@ -34,10 +34,10 @@ test:
   commands:
     - pip check
     - python -m threadpoolctl -i numpy
-    - pytest -v tests  # [not (aarch64 or s390x)]
-    # linux-aarch64 (neoversen1) and s390x (z14) are unrecognized
+    - pytest -v tests  # [not aarch64]
+    # linux-aarch64 and osx-arm64 (neoversen1) are unrecognized
     # architectures on Prefect.  linux-aarch64 (m1) is perfectly OK.
-    - pytest -v tests -k 'not test_architecture'  # [aarch64 or s390x]
+    - pytest -v tests -k 'not (test_architecture or test_architecture)'  # [aarch64 or osx]
 
 about:
   home: https://github.com/joblib/threadpoolctl
