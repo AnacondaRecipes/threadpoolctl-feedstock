@@ -24,7 +24,8 @@ requirements:
     - blas=*=openblas  # [osx and x86_64]
 
 test:
-  source_files: tests
+  source_files: 
+    - tests
   requires:
     - pip
     - numpy
