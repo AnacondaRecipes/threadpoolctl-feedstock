@@ -1,4 +1,4 @@
-{% set version = "3.5.0" %}
+{% set version = "3.7.0" %}
 
 package:
   name: threadpoolctl
@@ -6,25 +6,25 @@ package:
 
 source:
   url: https://github.com/joblib/threadpoolctl/archive/{{ version }}.tar.gz
-  sha256: 3d941a397b35d15522d095173d06adeadc1d95f81f63b35e078e77b2d7c80401
+  sha256: 435415e3dbcaa51d9f30bca91730c8483eabd83779dface976b10bf84a3a4b97
 
 build:
-  skip: true  # [py<38]
-  number: 1
+  skip: true  # [py<39]
+  number: 0
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   host:
     - python
     - pip
-    - flit-core >2,<4
+    - flit-core >=3.2,<5
   run:
     - python
   run_constrained:
     - blas=*=openblas  # [osx and x86_64]
 
 test:
-  source_files: 
+  source_files:
     - tests
   requires:
     - pip
